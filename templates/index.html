@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Shelter Explorer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Animal Shelter Explorer</h1>
+        <p>Discover which animals arrive in a shelter and what happens to them.</p>
+        <nav aria-label="Main navigation">
+            <a href="#catalogue">Animal catalogue</a>
+            <a href="#reasons">Why animals arrive</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>What does this data show?</h2>
+            <p>Every time an animal enters the Austin Animal Center (Texas), the shelter records it.
+               Later, it also records what happened to the animal: adopted, transferred, returned to its owner...</p>
+        </section>
+
+        <section id="catalogue">
+            <h2>Animal catalogue</h2>
+            <p>Explore the animals recorded by the shelter and filter them.</p>
+
+            <form id="filter-form" action="{{ url_for('index') }}#catalogue" method="get">
+                <div>
+                    <label for="animal-type">Animal type</label>
+                    <select id="animal-type" name="type">
+                        <option value="">All types</option>
+                        {% for animal_type in types %}
+                        <option value="{{ animal_type }}" {% if selected_type == animal_type %}selected{% endif %}>{{ animal_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="sex">Sex</label>
+                    <select id="sex" name="sex">
+                        <option value="">All</option>
+                        {% for sex in sexes %}
+                        <option value="{{ sex }}" {% if selected_sex == sex %}selected{% endif %}>{{ sex }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="outcome">Outcome (adopted or not)</label>
+                    <select id="outcome" name="outcome">
+                        <option value="">All outcomes</option>
+                        {% for outcome in outcomes %}
+                        <option value="{{ outcome }}" {% if selected_outcome == outcome %}selected{% endif %}>{{ outcome }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="health">Health condition at arrival</label>
+                    <select id="health" name="health">
+                        <option value="">All conditions</option>
+                        {% for health in healths %}
+                        <option value="{{ health }}" {% if selected_health == health %}selected{% endif %}>{{ health }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="reason">Why the animal arrived</label>
+                    <select id="reason" name="reason">
+                        <option value="">All reasons</option>
+                        {% for reason in reasons %}
+                        <option value="{{ reason }}" {% if selected_reason == reason %}selected{% endif %}>{{ reason }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div>
+                    <label for="max-days">Maximum days in shelter</label>
+                    <input type="number" id="max-days" name="max_days"
+                           min="0" step="1" placeholder="e.g. 30" value="{{ max_days }}">
+                </div>
+                <div class="form-actions">
+                    <button type="submit">Filter animals</button>
+                    <a class="reset-link" href="{{ url_for('index') }}">Clear filters</a>
+                </div>
+            </form>
+            <p id="status" role="status">{% if error %}{{ error }}{% else %}Showing {{ animals|length }} of {{ matching }} matching animals ({{ total }} in total). {% endif %}</p>
+            <div>
+                <table>
+                    <caption>Animals recorded by the shelter, most recent first</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Intake date</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Sex</th>
+                            <th scope="col">Breed</th>
+                            <th scope="col">Health condition</th>
+                            <th scope="col">Why it arrived</th>
+                            <th scope="col">Outcome</th>
+                            <th scope="col">Days in shelter</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for animal in animals %}
+                        <tr>
+                            <th scope="row">{{ animal.intake_date }}</th>
+                            <td>{{ animal.type }}</td>
+                            <td>{{ animal.sex }}</td>
+                            <td>{{ animal.breed }}</td>
+                            <td>{{ animal.health }}</td>
+                            <td>{{ animal.reason }}</td>
+                            <td>{{ animal.outcome }}</td>
+                            <td>{{ animal.days }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="reasons">
+            <h2>Why do animals arrive at the shelter?</h2>
+            <dl>
+                <dt>Owner surrender</dt>
+                <dd>The owner brings the animal to the shelter and gives it up.</dd>
+                <dt>Abandoned</dt>
+                <dd>The animal was left behind and no owner could be found.</dd>
+                <dt>Stray</dt>
+                <dd>The animal was found wandering without its owner. It is not necessarily abandoned.</dd>
+            </dl>
+        </section>
+        <footer>
+            <p>
+                Data source:
+                <a href="https://data.austintexas.gov/">
+                    City of Austin Open Data Portal.
+                </a>
+            </p>
+            <p>
+                <a href="#about">
+                    Back to the introduction.
+                </a>
+            </p>
+        </footer>
+    </main>
+</body>
+</html>
