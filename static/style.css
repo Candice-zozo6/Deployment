@@ -1,4 +1,4 @@
-* {
+- {
     box-sizing: border-box;
 }
 
@@ -6,14 +6,14 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #dbbccd;
-    color: #375379;
+    background-color: #f6f2ed;
+    color: #263244;
 }   
 
 header {
     padding: 3rem 1.5rem;
-    color: #4ac96c;
-    background-color: #14253f;
+    color: #f8fafc;
+    background-color: #1e3a5f;
     text-align: center;
 }
 
@@ -29,7 +29,7 @@ h2 {
 }
 
 a {
-    color: #6aaffa;
+    color: #1d63b8;
     text-underline-offset: 0.2em;
 }
 
@@ -46,7 +46,7 @@ nav {
 }
 
 nav a {
-    color: #b9e6ff;
+    color: #ffd166;
 }
 
 main, 
@@ -60,7 +60,7 @@ footer {
 section {
     margin-bottom: 1.5rem;
     padding: 2rem;
-    border: 2px solid #d7e0ea;
+    border: 2px solid #e5ddd3;
     border-radius: 0.5rem;
     background-color: #ffffff;
 }
@@ -71,7 +71,7 @@ form {
     gap: 1rem;
     margin: 15 rem 0;
     padding: 1.25rem;
-    background-color: #1bd785;
+    background-color: #eef5f0;
     border-radius: 0.5rem;
 }
 
@@ -85,7 +85,7 @@ input,
 select,
 button {
     padding: 0.65rem;
-    border: 1px solid #7b8da3;
+    border: 1px solid #b8c4d0;
     border-radius: 0.25rem;
     font: inherit;
 }
@@ -107,23 +107,23 @@ select {
 
 button {
     color: #ffffff;
-    background-color: #175ca4;
+    background-color: #2a7b6f;
     cursor: pointer;
 }
 
 button[type="reset"] {
-    color: #203047;
+    color: #263244;
     background-color: #ffffff;
 }
 
 button:disabled {
-    color: #475569;
-    background-color: #dce3eb;
+    color: #5c6b7c;
+    background-color: #e2e8f0;
     cursor: not-allowed;
 }
 
 :focus-visible {
-    outline: 3px solid #bd5a00;
+    outline: 3px solid #d97706;
     outline-offset: 3px;
 }
 
@@ -141,15 +141,15 @@ caption {
 th, 
 td {
     padding: 0.85rem;
-    border-bottom: 1px solid #d7e0ea;
+    border-bottom: 1px solid #e5ddd3;
 }
 
 thead {
-    background-color: #e8eef6;
+    background-color: #edf2f7;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f8fafc;
+    background-color: #faf7f4;
 }
 
 footer {
@@ -189,4 +189,3 @@ dd {
         grid-template-columns: 1fr;
     }
 }
-
